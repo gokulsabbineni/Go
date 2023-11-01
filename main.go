@@ -2,13 +2,12 @@ package main
 
 import (
 	"fmt"
-	"myproject/simplecalc"
 )
 
 func main() {
 	fmt.Println("HELLO!")
 	a, b := 12.0, 3.0
-	fmt.Println(simplecalc.Add(a, b))
+	fmt.Println(a, b)
 
 }
 
