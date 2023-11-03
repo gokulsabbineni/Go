@@ -1,50 +1,81 @@
 package main
 
-import (
-	"fmt"
-	"myproject/simplecalc"
-)
-
-const Hello = "hello world"
+import "fmt"
 
 func main() {
+	g := map[string]float64{
+		"x": 92.3,
+		"y": 99.8,
+		"z": 91.2,
+	}
 
-	var hello int = 64
+	g["w"] = 85.1
 
-	// a := "string"
+	xvalue := g["x"]
+	fmt.Println(xvalue)
 
-	a, b := 12, 12
-	fmt.Println("Hello")
-	// fmt.Println(simplecalc.Add(a, b))
-	fmt.Println(simplecalc.Sub(a, b))
-	fmt.Println(Hello)
-	fmt.Println(hello)
+	g["x"] = 90.5
+
+	delete(g, "y")
+
+	for student, grade := range g {
+		fmt.Println(student, grade)
+	}
+
+	if grade, ok := g["z"]; ok {
+		fmt.Println(grade, ok)
+	} else {
+		fmt.Println("not found")
+	}
+
 }
 
-// datatypes in go:
+// Pointers
 
-// 1. Boolean Type: bool    var a bool a =
-// 2. Numeric Types: Int, Float, Complex Numbers
+// Note:
+// default value of a pointer is nil
+// we cann't increment or decrement a pointer
+// j : 0x20e456734 = 20
+// p : 0x20e456734
 
-// Int : Signed Integer and Unsigned Integer    -1    1   1
+// * -> holds the value
+// & -> holds the address
 
-// Int, int8, int16, int64
+// Struct
 
-// Uint, uint8,uint16,uint64
+// var bookTitle = "hello"
+// var
+// 0 1 2 3 4 -- index of an arr
+// 1 2 3 4 5 -- values which are holding in the index
 
-// Float: float32 and float64
+// Slices:
+// length and capacity
 
-// Complex Number : 102 + 5i complex64 and comple128
+// length: 3
 
-// 3. string type : string
+// s:=make([]int, 3, 5)
 
-// 4. dervied types:
+// s = {1,2,3}    ----- lenght 3 and capacity 3
+// s = {1,2,3,4,5} ----- length 5 and capacity 6
 
-// Default Value
+// s = {1,2,3,4,5,6} --- length 6 and capacity 10
 
-// Constants
+// 4 ways you can declare a slice:
 
-// Int = 0
-// string = ""
-// bool = false
-// float64 = 0.0
+// 1. var s []int
+// 2. s:=make([]int, 3, 5)
+// 	s := make([]int,3)
+// 3. s := []int{1,2,3}
+// 4.
+
+// 0 1 2 3 4  ----Index
+
+// 1 2 3 4 5------ Elements
+
+// Maps:
+// a := make(map[string]string)
+// map literals
+// a := map[string]int{
+// 	"one" : 1
+// 	"two" : 2
+// }
