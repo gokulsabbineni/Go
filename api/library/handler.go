@@ -21,7 +21,7 @@ func (h Handler) CreateHandler(db *sql.DB) http.HandlerFunc {
 			http.Error(w, "Method is not allowed", http.StatusMethodNotAllowed)
 			return
 		}
-
+    
 		var book model.Book
 		if err := json.NewDecoder(r.Body).Decode(&book); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)

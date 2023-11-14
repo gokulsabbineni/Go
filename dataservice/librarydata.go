@@ -11,7 +11,6 @@ func CreateBook(db *sql.DB, book model.Book) error {
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 
