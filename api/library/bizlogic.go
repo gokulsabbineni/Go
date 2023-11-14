@@ -2,27 +2,30 @@ package api
 
 import (
 	"database/sql"
-	"encoding/json"
 	"errors"
 	"myproject/dataservice"
 	"myproject/model"
-	"net/http"
 )
 
-func CreateBookLogic(db *sql.DB, w http.ResponseWriter, r *http.Request) error {
-	// author and title
-	var book model.Book
-	if err := json.NewDecoder(r.Body).Decode(&book); err != nil {
-		return err
-	}
+type IBizLogic interface {
+	CreateBookLogic(book model.Book) error
+}
 
-	if exists, err := dataservice.GetBook(db, book.Title, book.Author); err != nil {
+type Bizlogic struct {
+	DB *sql.DB
+}
+
+func NewBizLogic(db *sql.DB) *Bizlogic {
+	return &Bizlogic{DB: db}
+}
+
+func (bl *Bizlogic) CreateBookLogic(book model.Book) error {
+	if exists, err := dataservice.GetBook(bl.DB, book.Title, book.Author); err != nil {
 		return err
 	} else if exists {
-		http.Error(w, "Book already exists", http.StatusBadRequest)
 		return errors.New("book already exists")
 	}
-	return dataservice.CreateBook(db, w, r)
+	return dataservice.CreateBook(bl.DB, book)
 }
 
 //updatebooklogic
